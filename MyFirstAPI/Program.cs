@@ -1,11 +1,17 @@
+using MyFirstAPI;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var teste = builder.Configuration.GetSection("MyClass").Get<MyClass>();
+var testeNumber = builder.Configuration.GetSection("MyClass").GetSection("Number").Get<int>();
+var testeSimplificado = builder.Configuration.GetValue<int>("MyClass:Number");
+var testeJson = builder.Configuration.GetSection("MyClass").GetSection("Prop1").Value;
 
 var app = builder.Build();
 
