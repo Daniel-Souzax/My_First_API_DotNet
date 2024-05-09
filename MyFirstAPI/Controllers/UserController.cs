@@ -13,7 +13,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     
-    public IActionResult Get([FromHeader]int id, [FromHeader]string? nickname) 
+    public IActionResult GetById([FromHeader]int id) 
     {
         var response = new User
         {
@@ -37,5 +37,46 @@ public class UserController : ControllerBase
 
         return Created(string.Empty, response);
     }
+
+    [HttpPut]
+    [Route("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public IActionResult Update(
+        [FromRoute] int id,  
+        [FromBody] RequestUpdateUserProfileJson request)
+    {
+        return NoContent();
+    }
+
+    [HttpDelete] 
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+
+    public IActionResult Delete()
+    {
+        return NoContent();
+    }
+
+
+    [HttpGet]
+    [ProducesResponseType(typeof(List<User>), StatusCodes.Status200OK)]
+    public IActionResult GetAll()
+    {
+
+        var response = new List<User>()
+        {
+            new User { Id = 1, Age = 22, Name = "Dan"},
+            new User { Id = 1, Age = 23, Name = "Sa"}
+        };
+
+        return Ok(response);
+        
+    }
+
+    [HttpPut]
+    public IActionResult ChangePassword([FromBody] RequestChangePasswordJson request)
+    {
+        return NoContent();
+    }
+   
 }
     
