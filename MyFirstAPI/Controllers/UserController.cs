@@ -56,7 +56,7 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-
+    /*
     [HttpGet]
     [ProducesResponseType(typeof(List<User>), StatusCodes.Status200OK)]
     public IActionResult GetAll()
@@ -69,14 +69,14 @@ public class UserController : ControllerBase
         };
 
         return Ok(response);
-        
     }
-
-    [HttpPut]
+     */
+    [HttpPut("change-password")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public IActionResult ChangePassword([FromBody] RequestChangePasswordJson request)
     {
         return NoContent();
     }
    
+
 }
-    
