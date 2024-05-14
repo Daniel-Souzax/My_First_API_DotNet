@@ -4,16 +4,15 @@ using MyFirstAPI.Communication.Requests;
 using MyFirstAPI.Communication.Responses;
 
 namespace MyFirstAPI.Controllers;
-[Route("api/[controller]")]
-[ApiController]
-public class UserController : ControllerBase
+
+public class UserController : MyFirstApiBaseController
 {
     [HttpGet]
+    [Route("{id}")]
     [ProducesResponseType(typeof(User), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    
-    public IActionResult GetById([FromHeader]int id) 
+    public IActionResult GetById([FromRoute]int id) 
     {
         var response = new User
         {
@@ -50,13 +49,11 @@ public class UserController : ControllerBase
 
     [HttpDelete] 
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-
     public IActionResult Delete()
     {
         return NoContent();
     }
 
-    /*
     [HttpGet]
     [ProducesResponseType(typeof(List<User>), StatusCodes.Status200OK)]
     public IActionResult GetAll()
@@ -70,7 +67,7 @@ public class UserController : ControllerBase
 
         return Ok(response);
     }
-     */
+     
     [HttpPut("change-password")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public IActionResult ChangePassword([FromBody] RequestChangePasswordJson request)
