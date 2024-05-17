@@ -1,6 +1,9 @@
 ﻿namespace MyFirstAPI.Entities;
 
-public class Device
+public abstract class Device
 {
     protected bool IsConnected() => true;
+
+
+    public abstract string GetBrand();
 }
